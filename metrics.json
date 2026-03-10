@@ -1,0 +1,32 @@
+{
+  "dataset": {
+    "total_samples": 275,
+    "train_samples": 191,
+    "val_samples": 42,
+    "test_samples": 42,
+    "num_features": 32,
+    "positive_rate_pct": 5.45,
+    "target": "mortality"
+  },
+  "models": {
+    "Logistic Regression": {
+      "AUROC": 0.925,
+      "AUPRC": 0.3333,
+      "F1": 0.3333,
+      "Accuracy": 0.9048
+    },
+    "Random Forest": {
+      "AUROC": 0.85,
+      "AUPRC": 0.2,
+      "F1": 0.0,
+      "Accuracy": 0.9048
+    },
+    "MLP Neural Network": {
+      "AUROC": 0.625,
+      "AUPRC": 0.1357,
+      "F1": 0.0,
+      "Accuracy": 0.9524
+    }
+  },
+  "best_model": "Logistic Regression"
+}
