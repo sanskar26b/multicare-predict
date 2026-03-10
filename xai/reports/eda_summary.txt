@@ -1,0 +1,31 @@
+Dataset Info:
+Rows: 275
+Columns: 6
+Column Names: ['subject_id', 'age', 'heart_rate', 'temperature', 'category', 'label']
+Data Types:
+subject_id       int64
+age            float64
+heart_rate     float64
+temperature    float64
+category        object
+label            int64
+dtype: object
+
+Summary Statistics:
+             count  ...         max
+subject_id   275.0  ...  275.000000
+age          275.0  ...  100.000000
+heart_rate   247.0  ...  133.379690
+temperature  247.0  ...   39.691481
+label        275.0  ...    1.000000
+
+[5 rows x 8 columns]
+
+Missing Values Analysis:
+             Total    Percent
+subject_id       0   0.000000
+age              0   0.000000
+heart_rate      28  10.181818
+temperature     28  10.181818
+category         0   0.000000
+label            0   0.000000
