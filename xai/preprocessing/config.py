@@ -1,12 +1,13 @@
 import os
 
 # Base Directories
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # xai/
+REPO_ROOT = os.path.dirname(BASE_DIR)                                   # repo root
 DATA_DIR = os.path.join(BASE_DIR, 'data')
 REPORTS_DIR = os.path.join(BASE_DIR, 'reports')
 
-# Dataset Paths
-TRAINING_READY_PATH = os.path.join(DATA_DIR, 'training_ready', 'training_set.csv')
+# Dataset Paths — training_set.csv lives at repo root, not inside xai/
+TRAINING_READY_PATH = os.path.join(REPO_ROOT, 'training_ready', 'training_set.csv')
 PROCESSED_DATA_PATH = os.path.join(DATA_DIR, 'processed', 'processed_data.csv')
 WINDOWED_DATA_PATH = os.path.join(DATA_DIR, 'processed', 'X.npy')
 
