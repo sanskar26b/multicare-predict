@@ -25,6 +25,12 @@ import argparse
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 
+# Use the backend venv python/pip if it exists, else fall back to system python
+_venv_python = os.path.join(BASE, "backend", "venv", "Scripts", "python.exe")
+_venv_pip    = os.path.join(BASE, "backend", "venv", "Scripts", "pip.exe")
+VENV_PYTHON  = _venv_python if os.path.exists(_venv_python) else sys.executable
+VENV_PIP     = _venv_pip    if os.path.exists(_venv_pip)    else [sys.executable, "-m", "pip"]
+
 
 def run(cmd, cwd=None, check=True):
     print(f"\n$ {' '.join(cmd) if isinstance(cmd, list) else cmd}")
@@ -61,13 +67,20 @@ def step_train():
 
 def step_backend():
     print("\n" + "=" * 60)
-    print("STEP 4: Backend — install deps + start FastAPI")
+    print("STEP 4: Backend — start FastAPI (using venv)")
     print("=" * 60)
     backend_dir = os.path.join(BASE, "backend")
-    run([sys.executable, "-m", "pip", "install", "-r", "requirements.txt", "-q"], cwd=backend_dir)
+
+    # Create venv if it doesn't exist yet
+    if not os.path.exists(os.path.join(backend_dir, "venv")):
+        print("Creating backend venv...")
+        run([sys.executable, "-m", "venv", "venv"], cwd=backend_dir)
+        pip = os.path.join(backend_dir, "venv", "Scripts", "pip.exe")
+        run([pip, "install", "-r", "requirements.txt", "-q"], cwd=backend_dir)
+
     print("\nStarting FastAPI on http://localhost:8000 ...")
     print("Press Ctrl+C to stop.")
-    run([sys.executable, "-m", "uvicorn", "main:app", "--reload", "--port", "8000"],
+    run([VENV_PYTHON, "-m", "uvicorn", "main:app", "--reload", "--port", "8000"],
         cwd=backend_dir, check=False)
 
 
